@@ -1,0 +1,43 @@
+nginx:
+  image: nginx
+  ports:
+    - "80:80"
+    - "443:443"
+  volumes:
+    - ./etc/nginx/nginx.conf:/etc/nginx/nginx.conf
+    - ./sites:/etc/nginx/html
+  links:
+    - php7
+    - php56
+
+
+php7:
+  build: .
+  dockerfile: /etc/docker/dockerfile_php_7
+  volumes:
+    - ./sites:/var/www/html
+    - ./etc/php:/usr/local/etc/php
+    - ./sites:/etc/nginx/html
+  links:
+    - mysql
+
+
+mysql:
+  image: mysql
+  ports:
+    - "3306:3306"
+  environment:
+    - MYSQL_ROOT_PASSWORD=MY_PASSWORD
+    - MYSQL_DATABASE=YOUR_DATABASE_NAME
+
+
+php56:
+  build: .
+  dockerfile: /etc/docker/dockerfile_php_56
+  volumes:
+    - ./sites:/var/www/html
+    - ./etc/php:/usr/local/etc/php
+    - ./sites:/etc/nginx/html
+  links:
+    - mysql
+
