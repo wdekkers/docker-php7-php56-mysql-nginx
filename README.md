@@ -1,4 +1,3 @@
-
 # PHP 7 & PHP 5.6 Docker environment with MySQL running with nginx.
 Docker with the following containers: PHP 7, PHP 5.6 and MySQL and nginx. Based on an docker-compose.yml file
 
